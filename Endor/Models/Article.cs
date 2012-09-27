@@ -14,11 +14,8 @@ namespace Endor.Models
         public string author { get; set; }
         private string text { get; set; }
 
-        private Config config { get; set; }
-
-        public Article(string path, Config conf)
+        public Article(string path)
         {
-            config = conf;
             Load(path);
         }
 
