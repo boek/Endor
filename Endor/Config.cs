@@ -61,6 +61,11 @@ namespace Endor
             get;
             set;
         }
+        public static char SummaryDelim
+        {
+            get;
+            set;
+        }
 
         public static string Extension
         {
@@ -91,6 +96,7 @@ namespace Endor
             Markdown = true; //Use Markdown
             Disqus = false; //Disqus id, or false
             SummaryLength = 150;
+            SummaryDelim = '~';
             Extension = "txt"; //File extension
             Cache = 28800; //Cache duration, in seconds
             Error = "<font style='font-size:300%'>toto, we're not in Kansas anymore (#{code})</font>"; //custom error

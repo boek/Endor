@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using MarkdownSharp;
+using Endor.ExtensionMethods;
 
 namespace Endor.Models
 {
@@ -27,17 +27,21 @@ namespace Endor.Models
 
         }
 
+        public string Summary()
+        {
+            string summary;
+            if (text.Contains(Config.SummaryDelim))
+            {
+                summary = text.Trim(Config.SummaryDelim);
+            }else{
+                summary = text.Substring(0, Config.SummaryLength);
+            }
+            return Config.Markdown ? summary.MarkdownIt() : summary;
+        }
+
         public string body()
         {
-            if (Config.Markdown)
-            {
-                Markdown md = new Markdown();
-                return md.Transform(text);
-            }
-            else
-            {
-                return text;
-            }
+            return Config.Markdown ? text.MarkdownIt() : text;
         }
     }
 }

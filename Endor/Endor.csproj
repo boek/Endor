@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Controllers\EndorController.cs" />
+    <Compile Include="ExtensionMethods\EndorStrings.cs" />
     <Compile Include="Models\Archive.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
