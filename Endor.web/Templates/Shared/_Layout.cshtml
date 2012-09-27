@@ -1,0 +1,26 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/Public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/Public/css/coderay.css">
+    <link rel="alternate" type="application/atom+xml" title="<%= title %> - feed" href="/index.xml" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <title>@Endor.Config.Title - @ViewBag.title</title>
+  </head>
+  <body>
+    <header class="cf">
+      <h3><a href="/">Jeff Boek</a></h3>
+      <nav>
+        <!--<a href="/about/">About</a> |-->
+        <a href="/archives">Archives</a> |
+        <a href="http://twitter.com/jeffboek">Twitter</a>
+      </nav>
+    </header>
+    <section>
+        @RenderBody()
+    </section>
+    <footer>
+      powered by <a href="#">Endor</a>
+    </footer>
+  </body>
+</html>

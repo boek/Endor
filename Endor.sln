@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endor", "Endor\Endor.csproj", "{EDA37C3C-8D13-4727-9BB8-7DCB12DA35EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endor.web", "Endor.web\Endor.web.csproj", "{1797875F-40D2-4767-A77C-1E068F63DF67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDA37C3C-8D13-4727-9BB8-7DCB12DA35EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA37C3C-8D13-4727-9BB8-7DCB12DA35EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA37C3C-8D13-4727-9BB8-7DCB12DA35EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA37C3C-8D13-4727-9BB8-7DCB12DA35EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1797875F-40D2-4767-A77C-1E068F63DF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1797875F-40D2-4767-A77C-1E068F63DF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1797875F-40D2-4767-A77C-1E068F63DF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1797875F-40D2-4767-A77C-1E068F63DF67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
