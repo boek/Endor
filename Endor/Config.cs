@@ -20,6 +20,12 @@ namespace Endor
             set;
         }
 
+        public static string ArticlesPath
+        {
+            get;
+            set;
+        }
+
         public static string Root
         {
             get;
@@ -89,6 +95,7 @@ namespace Endor
         {
             Author = Environment.UserName; // Blog Author
             Title = "My new Endor blog!"; // Site Title
+            ArticlesPath = "Articles"; // Site Title
             Root = "index"; // site index
             Url = "localhost"; // root URL of the site
             Prefix = ""; // common path prefix for the blog

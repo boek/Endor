@@ -16,15 +16,28 @@ namespace Endor.web
     {
         protected void Application_Start()
         {
-            EndorSetup();
+            Setup_Endor();
             Setup_Templates();
             AreaRegistration.RegisterAllAreas();
             
             EndorRoutes.RegisterRoutes(RouteTable.Routes);
-        }
-        protected void EndorSetup()
+        }        
+        protected void Setup_Endor()
         {
-            Endor.Config.Title = "New Endor Blog!";
+            Config.Author = "Jeff Boek"; // Blog Author
+            Config.Title = "My new Endor blog!"; // Site Title
+            //Config.ArticlesPath = "Articles"; // Articles Path
+            //Config.Root = "index"; // site index
+            //Config.Url = "localhost"; // root URL of the site
+            //Config.Prefix = ""; // common path prefix for the blog
+            //Config.Date = DateTime.Now.ToShortDateString(); // Date format
+            //Config.Markdown = true; //Use Markdown
+            //Config.Disqus = false; //Disqus id, or false
+            //Config.SummaryLength = 150; // Summary Length
+            //Config.SummaryDelim = '~';  // Delimiter
+            //Config.Extension = "txt"; //File extension
+            //Config.Cache = 28800; //Cache duration, in seconds
+            //Config.Error = "<font style='font-size:300%'>toto, we're not in Kansas anymore (#{code})</font>"; //custom error            
         }
         protected void Setup_Templates()
         {
