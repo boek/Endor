@@ -32,8 +32,13 @@ namespace Endor.Models
                 date = Convert.ToDateTime(match.Groups[1].Value);
                 title = match.Groups[2].Value;
             }
-        }
 
+            text = parts;
+        }
+        public string Title()
+        {
+            return title.Humanize();
+        }
         public string Summary()
         {
             string summary;
@@ -41,11 +46,14 @@ namespace Endor.Models
             {
                 summary = text.Trim(Config.SummaryDelim);
             }else{
-                summary = text.Substring(0, Config.SummaryLength);
+                summary = text.Substring(0, Math.Min(text.Length, Config.SummaryLength));                
             }
             return Config.Markdown ? summary.MarkdownIt() : summary;
         }
-
+        public string Date()
+        {
+            return date.ToString("MMMM d yyyy");
+        }
         public string body()
         {
             return Config.Markdown ? text.MarkdownIt() : text;
@@ -64,6 +72,7 @@ namespace Endor.Models
             {
                 articles.Add(new Article(path));
             }
+            articles = articles.OrderByDescending(a => a.date).ToList();
         }
 
         IEnumerator<Article> IEnumerable<Article>.GetEnumerator()

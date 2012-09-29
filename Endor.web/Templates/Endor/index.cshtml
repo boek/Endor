@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "index";
-    Endor.Models.Articles Articles = new Endor.Models.Articles();
+    Endor.Models.Articles Articles = new Endor.Models.Articles();    
 }
 
 <section id="articles">
@@ -8,12 +8,12 @@
     { 
     <article class="post">
       <header>
-        <h1><a href="#">@article.title</a></h1>
-        <span class="date">@article.date</span>
+        <h1><a href="#">@article.Title()</a></h1>
+        <span class="date">@article.Date()</span>
       </header>
 
       <section class="content">
-        Summary
+        @Html.Raw(@article.Summary())     
       </section>
       <div class="more"><a href="#">read on &raquo;</a></div>
     </article>  
