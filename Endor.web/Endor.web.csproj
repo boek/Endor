@@ -144,6 +144,9 @@
   <ItemGroup>
     <Content Include="Templates\_viewstart.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Endor\Article.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

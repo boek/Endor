@@ -20,5 +20,10 @@ namespace Endor.ExtensionMethods
         {
             return Regex.Replace(value, "[^A-Za-z0-9 _]"," ");
         }
+
+        public static string Slugize(this string value)
+        {
+            return Regex.Replace(value.ToLower().Replace("&", "and").Replace(" ", "-"), "[^a-z0-9-]", "");
+        }
     }
 }

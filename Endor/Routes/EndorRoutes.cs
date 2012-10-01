@@ -15,6 +15,14 @@ namespace Endor.Routes
             routes.IgnoreRoute("{file}.css");
             routes.IgnoreRoute("{file}.html");
 
+
+
+            routes.MapRoute(
+                name: "Article",
+                url: "{year}/{month}/{day}/{slug}",
+                defaults: new { controller = "Endor", action = "Article" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

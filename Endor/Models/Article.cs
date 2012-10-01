@@ -6,12 +6,13 @@ using System.IO;
 using Endor.ExtensionMethods;
 using System.Collections;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace Endor.Models
 {
     public class Article
-    {
-        public string title { get; set; }
+    {        
+        private Hashtable meta { get; set; }
         public DateTime date { get; set; }        
         private string text { get; set; }
 
@@ -20,25 +21,36 @@ namespace Endor.Models
             Load(path);
         }
 
-        public void Load(string path)
+        private void Load(string path)
         {
             StreamReader sr = new StreamReader(path);
-            string parts = sr.ReadToEnd();
+            string[] parts = Regex.Split(sr.ReadToEnd(), "\r\n\r\n");
             sr.Close();
-            
-            Match match = Regex.Match(path, @"(\d{4}-\d{2}-\d{2})([^\/]*$)");
+
+            Match match = Regex.Match(path, @"(\d{4}-\d{2}-\d{2})");
             if (match.Success)
             {
-                date = Convert.ToDateTime(match.Groups[1].Value);
-                title = match.Groups[2].Value;
+                date = Convert.ToDateTime(match.Groups[1].Value);                
             }
-
-            text = parts;
+            meta = JsonConvert.DeserializeObject<Hashtable>(parts[0].Replace(System.Environment.NewLine, ""));
+            text = parts[1].Replace(System.Environment.NewLine, "");
         }
+
         public string Title()
         {
-            return title.Humanize();
+            return meta.ContainsKey("title") ? meta["title"].ToString().Humanize() : "An Article";
         }
+
+        public string Slug()
+        {
+            return meta.ContainsKey("slug") ? meta["slug"].ToString() : meta["title"].ToString().Slugize();
+        }
+
+        public string Path()
+        {
+            return string.Format("/{0}{1}/{2}", Config.Prefix, date.ToString("yyyy/MM/d"), Slug());
+        }
+
         public string Summary()
         {
             string summary;
@@ -50,6 +62,7 @@ namespace Endor.Models
             }
             return Config.Markdown ? summary.MarkdownIt() : summary;
         }
+
         public string Date()
         {
             return date.ToString("MMMM d yyyy");
@@ -60,68 +73,75 @@ namespace Endor.Models
         }
     }
 
-    public class Articles : IEnumerable<Article>
+    public class Articles : IEnumerable
     {
         private string[] filePaths;
-        private List<Article> articles = new List<Article>();
+        private Article[] _articles;
 
         public Articles()
         {
             filePaths = Directory.GetFiles(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, Config.ArticlesPath), "*." + Config.Extension);
-            foreach (string path in filePaths)
+            for (int i = 0; i < filePaths.Length; i++)
             {
-                articles.Add(new Article(path));
+                _articles[i] = new Article(filePaths[i]);
             }
-            articles = articles.OrderByDescending(a => a.date).ToList();
+            _articles = _articles.OrderByDescending(a => a.date).ToArray();
         }
 
-        IEnumerator<Article> IEnumerable<Article>.GetEnumerator()
+        public IEnumerator<Article> GetEnumerator()
         {
-            return (IEnumerator<Article>)GetEnumerator();
+            return new ArticleEnum(_articles);
         }
 
-        public IEnumerator GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new ArticlesEnumerator(this);
+            return (IEnumerator)GetEnumerator();
         }
-        
-        private class ArticlesEnumerator : IEnumerator
-        {
-            private int position = -1;
-            private Articles a;
-
-            public ArticlesEnumerator(Articles a)
-            {
-                this.a = a;
-            }
-
-            public bool MoveNext()
-            {
-                if (position < a.articles.Count - 1)
-                {
-                    position++;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            public void Reset()
-            {
-                position = -1;
-            }
-
-            public object Current
-            {
-                get
-                {
-                    return a.articles[position];
-                }
-            }
-
-        }
-        
     }
+
+    public class ArticleEnum : IEnumerator
+    {
+        public Article[] _articles;
+        int position = -1;
+
+        public PeopleEnum(Article[] list)
+        {
+            _articles = list;
+        }
+
+        public bool MoveNext()
+        {
+            position++;
+            return (position < _articles.Length);
+        }
+
+        public void Reset()
+        {
+            position = -1;
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+
+        public Article Current
+        {
+            get
+            {
+                try
+                {
+                    return _articles[position];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
+    }
+       
 }
