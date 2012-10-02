@@ -16,6 +16,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -136,7 +140,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Endor\index.cshtml" />
+    <Content Include="Templates\Endor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Templates\Shared\_Layout.cshtml" />
@@ -146,6 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Templates\Endor\Article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Endor\Archives.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Endor\about.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

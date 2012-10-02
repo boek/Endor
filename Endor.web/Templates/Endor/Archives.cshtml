@@ -1,0 +1,14 @@
+﻿@model Endor.Models.Articles
+@{
+    ViewBag.Title = "index";    
+}
+<h1>archives</h1>
+<ul>
+    @foreach(Article article in Model){
+      <li>
+        <a href="@article.Path()">@article.Title()</a> - <span class="archive-date">@article.Date()</span>
+      </li>
+    }
+</ul>
+
+

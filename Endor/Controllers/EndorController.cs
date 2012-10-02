@@ -11,14 +11,28 @@ namespace Endor.Controllers
     {
         private Articles Articles = new Articles();
 
-        public ActionResult Index()
+        public ActionResult Index(string view = "")
         {            
+            if(string.IsNullOrEmpty(view))
+            {
+                return View(Articles);
+            }
+            
+            return View(view);
+        }
+
+        public ActionResult Archives()
+        {
             return View(Articles);
         }
-        
+
         public ActionResult Article(string Year, string Month, string Day, string Slug)
-        {            
-            return View();
+        {
+            Article article = (from Article art in Articles
+                               where art.Slug() == Slug
+                               select art).FirstOrDefault();
+                              
+            return View(article);
         }
     }
 }

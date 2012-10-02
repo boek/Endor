@@ -24,6 +24,18 @@ namespace Endor.Routes
             );
 
             routes.MapRoute(
+                name: "Archives",
+                url: "Archives",
+                defaults: new { controller = "Endor", action = "Archives" }
+            );
+
+            routes.MapRoute(
+                name: "Pages",
+                url: "{view}",
+                defaults: new { controller = "Endor", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Endor", action = "Index", id = UrlParameter.Optional }

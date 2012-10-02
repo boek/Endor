@@ -81,6 +81,7 @@ namespace Endor.Models
         public Articles()
         {
             filePaths = Directory.GetFiles(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, Config.ArticlesPath), "*." + Config.Extension);
+            _articles = new Article[filePaths.Length];
             for (int i = 0; i < filePaths.Length; i++)
             {
                 _articles[i] = new Article(filePaths[i]);
@@ -88,14 +89,14 @@ namespace Endor.Models
             _articles = _articles.OrderByDescending(a => a.date).ToArray();
         }
 
-        public IEnumerator<Article> GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
             return new ArticleEnum(_articles);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
+            return (IEnumerator) GetEnumerator();
         }
     }
 
@@ -104,7 +105,7 @@ namespace Endor.Models
         public Article[] _articles;
         int position = -1;
 
-        public PeopleEnum(Article[] list)
+        public ArticleEnum(Article[] list)
         {
             _articles = list;
         }
